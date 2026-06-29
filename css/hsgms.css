@@ -1,0 +1,730 @@
+/**
+ * ===========================================================
+ * HS Studio Graduation Management System (HSGMS)
+ * File: hsgms.css
+ * Sprint: 1D
+ *
+ * Purpose:
+ * Core stylesheet for HSGMS derived entirely from UI_GUIDELINE.md
+ * and COMPONENT_LIBRARY.md. Provides styling for booking.html.
+ *
+ * Architecture:
+ * Pure Vanilla CSS (No Frameworks). Uses native CSS variables.
+ * Implements mobile-first responsive design.
+ * ===========================================================
+ */
+
+/* ===========================================================
+   1. DESIGN TOKENS (Variables)
+   =========================================================== */
+:root {
+    /* Primary Colors (Blue Ink) */
+    --p-900: #0F2A4A;
+    --p-800: #1A3D6E;
+    --p-700: #1E4F8C;
+    --p-600: #2563EB;
+    --p-500: #3B82F6;
+    --p-400: #60A5FA;
+    --p-200: #BFDBFE;
+    --p-100: #DBEAFE;
+    --p-50:  #EFF6FF;
+
+    /* Neutral Colors (Slate) */
+    --n-950: #0C1524;
+    --n-800: #1E293B;
+    --n-600: #475569;
+    --n-400: #94A3B8;
+    --n-300: #CBD5E1; /* CR-017: Ditambahkan untuk border upload area */
+    --n-200: #E2E8F0;
+    --n-100: #F1F5F9;
+    --n-50:  #F8FAFC;
+    --n-0:   #FFFFFF;
+
+    /* Semantic / Status Colors */
+    --s-600: #16A34A;
+    --s-500: #22C55E;
+    --s-100: #DCFCE7;
+    --w-600: #D97706;
+    --w-400: #FBBF24;
+    --w-100: #FEF3C7;
+    --d-700: #B91C1C;
+    --d-500: #EF4444;
+    --d-100: #FEE2E2;
+    --i-600: #0284C7;
+    --i-100: #E0F2FE;
+
+    /* Typography */
+    --font-ui: 'Inter', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+    
+    --text-xs: 11px; --line-xs: 16px;
+    --text-sm: 13px; --line-sm: 20px;
+    --text-base: 15px; --line-base: 24px;
+    --text-md: 16px; --line-md: 26px;
+    --text-lg: 18px; --line-lg: 28px;
+    --text-xl: 22px; --line-xl: 32px;
+    --text-2xl: 28px; --line-2xl: 36px;
+
+    /* Spacing System (Base 4px) */
+    --space-0: 0px;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* Border Radius */
+    --r-none: 0px;
+    --r-sm: 6px;
+    --r-md: 8px;
+    --r-lg: 10px;
+    --r-xl: 12px;
+    --r-2xl: 16px;
+    --r-3xl: 20px;
+    --r-full: 9999px;
+
+    /* Shadows */
+    --sh-none: none;
+    --sh-xs: 0 1px 2px rgba(0,0,0,0.05);
+    --sh-sm: 0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.05);
+    --sh-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+    --sh-lg: 0 10px 15px rgba(0,0,0,0.07), 0 4px 6px rgba(0,0,0,0.04);
+    --sh-xl: 0 20px 25px rgba(0,0,0,0.08), 0 8px 10px rgba(0,0,0,0.04);
+    --sh-2xl: 0 25px 50px rgba(0,0,0,0.12);
+    --sh-focus: 0 0 0 3px rgba(37,99,235,0.25);
+    --sh-focus-d: 0 0 0 3px rgba(239,68,68,0.25);
+
+    /* Transitions */
+    --trans-fast: 150ms cubic-bezier(0, 0, 0.2, 1);
+    --trans-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    --trans-spring: 100ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===========================================================
+   2. CSS RESET & BASE
+   =========================================================== */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-ui);
+    background-color: var(--n-50);
+    color: var(--n-950);
+    font-size: var(--text-base);
+    line-height: var(--line-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+p {
+    margin: 0;
+}
+
+/* ===========================================================
+   3. TYPOGRAPHY & UTILITIES
+   =========================================================== */
+.hsg-text-xs { font-size: var(--text-xs); line-height: var(--line-xs); }
+.hsg-text-sm { font-size: var(--text-sm); line-height: var(--line-sm); }
+.hsg-text-base { font-size: var(--text-base); line-height: var(--line-base); }
+.hsg-text-md { font-size: var(--text-md); line-height: var(--line-md); }
+.hsg-text-lg { font-size: var(--text-lg); line-height: var(--line-lg); }
+.hsg-text-xl { font-size: var(--text-xl); line-height: var(--line-xl); }
+.hsg-text-2xl { font-size: var(--text-2xl); line-height: var(--line-2xl); }
+
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+.hsg-text-n-400 { color: var(--n-400); }
+.hsg-text-n-600 { color: var(--n-600); }
+.hsg-text-n-800 { color: var(--n-800); }
+.hsg-text-p-600 { color: var(--p-600); }
+
+.hsg-mb-4 { margin-bottom: var(--space-4); }
+.hsg-mt-2 { margin-top: var(--space-2); }
+.hsg-mt-4 { margin-top: var(--space-4); }
+.hsg-mt-8 { margin-top: var(--space-8); }
+
+.hsg-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ===========================================================
+   4. LAYOUT COMPONENTS (Level 3)
+   =========================================================== */
+/* Navbar */
+.hsg-navbar {
+    background-color: var(--n-0);
+    box-shadow: var(--sh-sm);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+}
+
+.hsg-navbar__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hsg-navbar__brand {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hsg-navbar__logo {
+    font-size: var(--text-md);
+    font-weight: 700;
+    color: var(--n-950);
+    line-height: 1.2;
+}
+
+.hsg-navbar__subtitle {
+    font-size: var(--text-xs);
+    color: var(--n-600);
+}
+
+/* Content Wrapper */
+.hsg-content-wrapper {
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hsg-content-wrapper[data-max-width="720px"] {
+    max-width: 720px;
+}
+
+.hsg-content-wrapper--form {
+    padding: var(--space-10) var(--space-6);
+}
+
+/* Footer */
+.hsg-footer {
+    text-align: center;
+    padding: var(--space-8) 0;
+}
+
+/* ===========================================================
+   5. COMPOSITE COMPONENTS (Level 1)
+   =========================================================== */
+/* Section Header */
+.hsg-section-header {
+    margin-bottom: var(--space-6);
+    text-align: center;
+}
+
+.hsg-section-header__title {
+    font-size: var(--text-2xl);
+    line-height: var(--line-2xl);
+    font-weight: 700;
+    color: var(--n-950);
+    margin-bottom: var(--space-2);
+}
+
+.hsg-section-header__description {
+    font-size: var(--text-base);
+    color: var(--n-600);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Stepper */
+.hsg-stepper {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 2px solid var(--n-200);
+    margin-bottom: var(--space-8);
+    scrollbar-width: none;
+    gap: var(--space-4);
+}
+
+.hsg-stepper::-webkit-scrollbar {
+    display: none;
+}
+
+.hsg-stepper__step {
+    padding: var(--space-3) var(--space-2);
+    color: var(--n-400);
+    font-weight: 600;
+    font-size: var(--text-sm);
+    white-space: nowrap;
+    transition: all var(--trans-normal);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px; /* Pull down to overlap border */
+    cursor: default;
+    user-select: none;
+}
+
+.hsg-stepper__step.is-active {
+    color: var(--p-600);
+    border-bottom-color: var(--p-600);
+}
+
+/* Alert */
+.hsg-alert {
+    padding: var(--space-4) var(--space-5);
+    border-radius: var(--r-xl);
+    border: 1px solid transparent;
+}
+
+.hsg-alert--info {
+    background-color: var(--i-100);
+    border-color: var(--p-200);
+    border-left: 4px solid var(--i-600);
+    color: var(--n-950);
+}
+
+.hsg-alert p {
+    margin-bottom: var(--space-1);
+}
+
+.hsg-alert ul {
+    list-style-type: disc;
+    padding-left: var(--space-6);
+}
+
+.hsg-alert li {
+    margin-bottom: var(--space-1);
+}
+
+/* ===========================================================
+   6. DOMAIN COMPONENTS (Level 2)
+   =========================================================== */
+/* Booking Card */
+.hsg-booking-card {
+    background-color: var(--n-0);
+    border-radius: var(--r-3xl);
+    box-shadow: var(--sh-xl);
+    border: 1px solid var(--n-100);
+    overflow: hidden;
+    transition: box-shadow var(--trans-normal);
+}
+
+.hsg-booking-card:hover {
+    box-shadow: var(--sh-2xl);
+}
+
+.hsg-booking-card > .hsg-card__body {
+    padding: var(--space-8);
+}
+
+.hsg-booking-card > .hsg-card__footer {
+    padding: var(--space-5) var(--space-8);
+    background-color: var(--n-50);
+    border-top: 1px solid var(--n-200);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-4);
+}
+
+/* Selectable Package Card */
+.hsg-package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+}
+
+.hsg-card--selectable {
+    background-color: var(--n-0);
+    border: 2px solid var(--n-200);
+    border-radius: var(--r-xl);
+    cursor: pointer;
+    transition: all var(--trans-fast);
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.hsg-card--selectable .hsg-card__body {
+    padding: var(--space-5);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+}
+
+.hsg-card--selectable h3 {
+    color: var(--n-950);
+    margin-bottom: var(--space-2);
+}
+
+.hsg-card--selectable:hover:not(:has(input:checked)) {
+    border-color: var(--p-400);
+    transform: translateY(-2px);
+    box-shadow: var(--sh-md);
+    background-color: var(--n-0);
+}
+
+.hsg-card--selectable:has(input:checked) {
+    border-color: var(--p-600);
+    background-color: var(--p-50);
+    box-shadow: var(--sh-md);
+}
+
+.hsg-card--selectable:has(input:checked) h3 {
+    color: var(--p-700);
+}
+
+/* Ghost Card (Summary) */
+.hsg-card--ghost {
+    background-color: var(--n-50);
+    box-shadow: none;
+    border: 1px solid var(--n-200);
+    border-radius: var(--r-xl);
+    padding: var(--space-2);
+}
+
+.hsg-card--ghost .hsg-card__body p {
+    margin-bottom: var(--space-3);
+    padding-bottom: var(--space-3);
+    border-bottom: 1px dashed var(--n-200);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.hsg-card--ghost .hsg-card__body p:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.hsg-card--ghost strong {
+    color: var(--n-800);
+    font-weight: 600;
+}
+
+.hsg-card--ghost span {
+    color: var(--n-600);
+    font-size: var(--text-base);
+}
+
+/* ===========================================================
+   7. FORM COMPONENTS (Level 0)
+   =========================================================== */
+.hsg-form-section {
+    animation: fadeIn var(--trans-normal) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hsg-form-group {
+    margin-bottom: var(--space-6);
+}
+
+.hsg-label {
+    display: block;
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--n-800);
+    margin-bottom: var(--space-2);
+}
+
+.hsg-helper-text {
+    display: block;
+    font-size: var(--text-xs);
+    color: var(--n-600);
+    margin-top: var(--space-2);
+}
+
+/* Text Inputs & Textarea */
+.hsg-text-input input,
+.hsg-phone-input input,
+.hsg-textarea textarea {
+    width: 100%;
+    border: 1px solid var(--n-200);
+    background-color: var(--n-0);
+    border-radius: var(--r-md);
+    color: var(--n-950);
+    font-family: var(--font-ui);
+    font-size: var(--text-base);
+    transition: all var(--trans-fast);
+    outline: none;
+}
+
+.hsg-text-input input::placeholder,
+.hsg-phone-input input::placeholder,
+.hsg-textarea textarea::placeholder {
+    color: var(--n-400);
+}
+
+.hsg-text-input input {
+    height: 48px;
+    padding: 0 var(--space-4);
+}
+
+.hsg-text-input input:focus,
+.hsg-textarea textarea:focus {
+    border-color: var(--p-600);
+    background-color: var(--n-0);
+    box-shadow: var(--sh-focus);
+}
+
+/* Textarea Specific */
+.hsg-textarea textarea {
+    min-height: 120px;
+    padding: var(--space-4);
+    resize: vertical;
+    line-height: 1.5;
+}
+
+/* Phone Input (Composite) */
+.hsg-phone-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--n-200);
+    background-color: var(--n-0);
+    border-radius: var(--r-md);
+    height: 48px;
+    transition: all var(--trans-fast);
+    overflow: hidden;
+}
+
+.hsg-phone-input:focus-within {
+    border-color: var(--p-600);
+    background-color: var(--n-0);
+    box-shadow: var(--sh-focus);
+}
+
+.hsg-phone-input__prefix {
+    padding: 0 var(--space-4);
+    color: var(--n-800);
+    font-weight: 600;
+    font-size: var(--text-base);
+    background-color: var(--n-50);
+    border-right: 1px solid var(--n-200);
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.hsg-phone-input input {
+    border: none;
+    background-color: transparent;
+    height: 100%;
+    padding: 0 var(--space-4);
+    box-shadow: none !important;
+    flex-grow: 1;
+}
+
+/* Upload Area */
+.hsg-upload-area {
+    position: relative;
+    border: 2px dashed var(--n-300);
+    border-radius: var(--r-xl);
+    background-color: var(--n-50);
+    padding: var(--space-8) var(--space-6);
+    text-align: center;
+    transition: all var(--trans-fast);
+    cursor: pointer;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hsg-upload-area:hover,
+.hsg-upload-area:focus-within {
+    border-color: var(--p-600);
+    background-color: var(--p-50);
+}
+
+.hsg-upload-area__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.hsg-upload-area__placeholder {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    pointer-events: none;
+    color: var(--n-800);
+    align-items: center;
+}
+
+.hsg-upload-area__placeholder .hsg-text-md {
+    font-weight: 600;
+    color: var(--p-600);
+}
+
+.hsg-upload-area__placeholder .hsg-text-xs {
+    color: var(--n-600);
+}
+
+/* ===========================================================
+   8. BUTTON COMPONENTS (Level 0)
+   =========================================================== */
+.hsg-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 48px; /* Prominent height for form actions */
+    padding: 0 var(--space-6);
+    border-radius: var(--r-lg);
+    font-family: var(--font-ui);
+    font-weight: 600;
+    font-size: var(--text-md);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: all var(--trans-spring);
+    text-align: center;
+}
+
+.hsg-btn:active:not(:disabled) {
+    transform: scale(0.97);
+}
+
+.hsg-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Primary Button */
+.hsg-btn--primary {
+    background-color: var(--p-600);
+    color: var(--n-0);
+    box-shadow: var(--sh-sm);
+}
+
+.hsg-btn--primary:hover:not(:disabled) {
+    background-color: var(--p-700);
+    box-shadow: var(--sh-md);
+}
+
+/* Secondary Button */
+.hsg-btn--secondary {
+    background-color: var(--n-0);
+    color: var(--p-600);
+    border: 1px solid var(--p-400);
+}
+
+.hsg-btn--secondary:hover:not(:disabled) {
+    background-color: var(--p-50);
+    border-color: var(--p-600);
+}
+
+/* Ghost Button */
+.hsg-btn--ghost {
+    background-color: transparent;
+    color: var(--n-600);
+}
+
+.hsg-btn--ghost:hover:not(:disabled) {
+    background-color: var(--n-200);
+    color: var(--n-950);
+}
+
+/* ===========================================================
+   9. RESPONSIVE MEDIA QUERIES (Level -1 Breakpoints)
+   =========================================================== */
+
+/* Tablet (768px - 1023px) */
+@media (max-width: 1023px) {
+    .hsg-content-wrapper--form {
+        padding: var(--space-8) var(--space-6);
+    }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+    .hsg-content-wrapper--form {
+        padding: var(--space-6) var(--space-4);
+    }
+
+    .hsg-navbar__container {
+        padding: 0 var(--space-4);
+    }
+
+    .hsg-section-header {
+        margin-bottom: var(--space-5);
+    }
+
+    .hsg-section-header__title {
+        font-size: var(--text-xl);
+        line-height: var(--line-xl);
+    }
+
+    .hsg-stepper {
+        margin-bottom: var(--space-6);
+    }
+
+    .hsg-booking-card {
+        border-radius: var(--r-2xl);
+    }
+
+    .hsg-booking-card > .hsg-card__body {
+        padding: var(--space-5);
+    }
+
+    .hsg-booking-card > .hsg-card__footer {
+        padding: var(--space-4) var(--space-5);
+        flex-direction: column;
+        gap: var(--space-3);
+    }
+
+    .hsg-card__footer .hsg-btn {
+        width: 100%;
+        height: 48px;
+    }
+
+    .hsg-package-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hsg-text-input input, 
+    .hsg-phone-input {
+        height: 44px;
+    }
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

@@ -1,0 +1,180 @@
+🥇 1. ChatGPT (GPT-5.5) → Software Architect ⭐⭐⭐⭐⭐
+
+Aku akan memakai ChatGPT untuk:
+
+Mendesain seluruh blueprint.
+Menentukan struktur database Firebase.
+Mendesain UX/UI.
+Membuat alur operasional.
+Mereview keamanan.
+Merancang fitur baru.
+Memastikan semua halaman saling terhubung.
+
+Dengan kata lain, ChatGPT menjadi CTO project.
+
+Bukan tukang coding.
+
+Melainkan otak sistem.
+
+🥈 2. Claude Opus 4 → Coding HTML Besar ⭐⭐⭐⭐⭐
+
+Kalau project sudah mencapai:
+
+5000+
+10000+
+20000+ baris
+
+Menurutku Claude lebih nyaman.
+
+Karena dia sangat kuat dalam:
+
+✅ membaca file besar
+
+✅ mempertahankan coding lama
+
+✅ edit file panjang
+
+✅ refactor
+
+Yang kita alami kemarin (file HTML kepotong) biasanya tidak terjadi di Claude Project.
+
+🥉 3. Gemini 2.5 Pro → Testing & Debug ⭐⭐⭐⭐☆
+
+Gemini sangat bagus untuk
+
+"Kenapa script ini error?"
+
+"Kenapa Firebase tidak connect?"
+
+"Kenapa event ini tidak jalan?"
+
+Dia cukup jago mencari bug.
+
+4. Cursor AI ⭐⭐⭐⭐⭐⭐⭐
+
+Kalau project ini benar-benar menjadi besar.
+
+Menurutku Cursor adalah investasi terbaik.
+
+Kenapa?
+
+Karena dia bekerja langsung di project.
+
+Misalnya foldermu:
+
+HS-STUDIO
+
+index.html
+
+admin.html
+
+booking.html
+
+firebase.js
+
+css/
+
+js/
+
+Cursor membaca semuanya sekaligus.
+
+Lalu kamu tinggal bilang.
+
+Tambahkan scanner barcode.
+
+Dia akan mengedit
+
+7 file
+
+sekaligus.
+
+5. VS Code + GitHub
+
+Aku justru menyarankan mulai sekarang.
+
+Projectmu jangan lagi disimpan seperti ini.
+
+Desktop
+
+HTML
+
+HTML BARU
+
+HTML FIX
+
+HTML FINAL
+
+HTML FINAL FIX
+
+HTML FIX FIX
+
+🤣
+
+Tapi gunakan
+
+GitHub.
+
+Karena nanti bisa
+
+Rollback.
+
+Menurutku kombinasi terbaik
+ChatGPT
+
+↓
+
+Blueprint
+
+↓
+
+Claude
+
+↓
+
+Coding
+
+↓
+
+Cursor
+
+↓
+
+Maintain
+
+↓
+
+GitHub
+
+↓
+
+Version
+
+Kalau aku menjadi project manager
+
+Aku akan membuat seperti ini.
+
+HS STUDIO
+
+↓
+
+ChatGPT
+
+"Rancang fitur."
+
+↓
+
+Claude
+
+"Tulis coding."
+
+↓
+
+Cursor
+
+"Edit project."
+
+↓
+
+GitHub
+
+"Simpan versi."

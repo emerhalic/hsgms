@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Foto Wisuda - HS Studio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/hsgms.css">
+</head>
+<body>
+
+    <nav class="hsg-navbar" data-context="client">
+        <div class="hsg-navbar__container">
+            <div class="hsg-navbar__brand">
+                <span class="hsg-navbar__logo">🎓 HS STUDIO</span>
+                <span class="hsg-navbar__subtitle">Graduation Management System</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hsg-content-wrapper hsg-content-wrapper--form" data-max-width="720px">
+        
+        <header class="hsg-section-header">
+            <h1 class="hsg-section-header__title">Booking Foto Wisuda</h1>
+            <p class="hsg-section-header__description">Silakan isi formulir di bawah ini untuk memesan dan mengamankan sesi foto wisuda Anda di HS Studio.</p>
+        </header>
+
+        <div class="hsg-stepper">
+            <div class="hsg-stepper__step is-active" id="nav-step-1">1. Pilih Paket</div>
+            <div class="hsg-stepper__step" id="nav-step-2">2. Data Wisudawan</div>
+            <div class="hsg-stepper__step" id="nav-step-3">3. Upload DP</div>
+            <div class="hsg-stepper__step" id="nav-step-4">4. Konfirmasi</div>
+        </div>
+
+        <div class="hsg-card hsg-booking-card">
+            <div class="hsg-card__body">
+                <form id="bookingForm" onsubmit="event.preventDefault();">
+
+                    <section id="step-1" class="hsg-form-section">
+                        <h2 class="hsg-text-lg hsg-mb-4">Pilih Paket Wisuda</h2>
+                        <div class="hsg-package-grid">
+                            
+                            <label class="hsg-card hsg-card--selectable" for="package_1">
+                                <input type="radio" id="package_1" name="packageId" value="pkg_1" data-name="Paket 1 - Basic" class="hsg-sr-only">
+                                <div class="hsg-card__body">
+                                    <h3 class="hsg-text-md font-semibold">Paket 1 - Basic</h3>
+                                    <p class="hsg-text-sm hsg-text-n-600">Harga: Rp 150.000</p>
+                                    <p class="hsg-text-xs hsg-text-p-600">Wajib DP: Rp 50.000</p>
+                                </div>
+                            </label>
+
+                            <label class="hsg-card hsg-card--selectable" for="package_2">
+                                <input type="radio" id="package_2" name="packageId" value="pkg_2" data-name="Paket 2 - Premium" class="hsg-sr-only">
+                                <div class="hsg-card__body">
+                                    <h3 class="hsg-text-md font-semibold">Paket 2 - Premium</h3>
+                                    <p class="hsg-text-sm hsg-text-n-600">Harga: Rp 300.000</p>
+                                    <p class="hsg-text-xs hsg-text-p-600">Wajib DP: Rp 50.000</p>
+                                </div>
+                            </label>
+
+                            <label class="hsg-card hsg-card--selectable" for="package_3">
+                                <input type="radio" id="package_3" name="packageId" value="pkg_3" data-name="Paket 3 - VIP" class="hsg-sr-only">
+                                <div class="hsg-card__body">
+                                    <h3 class="hsg-text-md font-semibold">Paket 3 - VIP</h3>
+                                    <p class="hsg-text-sm hsg-text-n-600">Harga: Rp 500.000</p>
+                                    <p class="hsg-text-xs hsg-text-p-600">Wajib DP: Rp 50.000</p>
+                                </div>
+                            </label>
+                            
+                        </div>
+                    </section>
+
+
+                    <section id="step-2" class="hsg-form-section" style="display: none;">
+                        <h2 class="hsg-text-lg hsg-mb-4">Data Wisudawan</h2>
+                        
+                        <div class="hsg-form-group">
+                            <label for="fullName" class="hsg-label">Nama Lengkap *</label>
+                            <div class="hsg-text-input">
+                                <input type="text" id="fullName" name="fullName" placeholder="Sesuai dengan nama di ijazah">
+                            </div>
+                        </div>
+
+                        <div class="hsg-form-group">
+                            <label for="phoneNumber" class="hsg-label">Nomor WhatsApp Aktif *</label>
+                            <div class="hsg-phone-input">
+                                <span class="hsg-phone-input__prefix">🇮🇩 +62</span>
+                                <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="812-3456-789">
+                            </div>
+                            <span class="hsg-helper-text">Pastikan nomor ini aktif di WhatsApp untuk menerima QR Code</span>
+                        </div>
+
+                        <div class="hsg-form-group">
+                            <label for="universityName" class="hsg-label">Universitas *</label>
+                            <div class="hsg-text-input">
+                                <input type="text" id="universityName" name="universityName" placeholder="Contoh: Universitas Airlangga">
+                            </div>
+                        </div>
+
+                        <div class="hsg-form-group">
+                            <label for="familyCount" class="hsg-label">Jumlah Keluarga (opsional)</label>
+                            <div class="hsg-text-input">
+                                <input type="number" id="familyCount" name="familyCount" placeholder="Contoh: 4">
+                            </div>
+                        </div>
+
+                        <div class="hsg-form-group">
+                            <label for="notes" class="hsg-label">Catatan Tambahan (opsional)</label>
+                            <div class="hsg-textarea">
+                                <textarea id="notes" name="notes" placeholder="Tuliskan permintaan khusus jika ada..." rows="3"></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section id="step-3" class="hsg-form-section" style="display: none;">
+                        <h2 class="hsg-text-lg hsg-mb-4">Pembayaran DP</h2>
+                        
+                        <div class="hsg-alert hsg-alert--info hsg-mb-4">
+                            <p class="hsg-text-sm">Silakan transfer DP sebesar <strong>Rp 50.000</strong> ke rekening berikut:</p>
+                            <ul class="hsg-text-sm hsg-mt-2">
+                                <li>BCA: <strong>1234 5678 90</strong> a.n HS Studio</li>
+                                <li>Mandiri: <strong>0987 6543 21</strong> a.n HS Studio</li>
+                            </ul>
+                        </div>
+
+                        <div class="hsg-form-group">
+                            <label for="transferProof" class="hsg-label">Upload Bukti Transfer *</label>
+                            <div class="hsg-upload-area">
+                                <input type="file" id="transferProof" name="transferProof" accept=".jpg, .jpeg, .png, .pdf" class="hsg-upload-area__input">
+                                <div class="hsg-upload-area__placeholder">
+                                    <span class="hsg-text-md">↑ Klik atau seret file ke sini</span>
+                                    <span class="hsg-text-xs hsg-text-n-400">JPG, PNG, PDF • Maks 5MB</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+
+                    <section id="step-4" class="hsg-form-section" style="display: none;">
+                        <h2 class="hsg-text-lg hsg-mb-4">Konfirmasi Booking</h2>
+                        <p class="hsg-text-sm hsg-text-n-600 hsg-mb-4">Pastikan data berikut sudah benar sebelum mengirimkan formulir booking Anda.</p>
+                        
+                        <div class="hsg-card hsg-card--ghost">
+                            <div class="hsg-card__body hsg-text-sm">
+                                <p><strong>Paket Pilihan:</strong> <span id="summaryPackage">-</span></p>
+                                <p><strong>Nama Lengkap:</strong> <span id="summaryName">-</span></p>
+                                <p><strong>WhatsApp:</strong> <span id="summaryPhone">-</span></p>
+                                <p><strong>Universitas:</strong> <span id="summaryUniv">-</span></p>
+                                <p><strong>Jumlah Keluarga:</strong> <span id="summaryFamily">-</span></p>
+                                <p><strong>Catatan:</strong> <span id="summaryNotes">-</span></p>
+                            </div>
+                        </div>
+                    </section>
+
+                </form>
+            </div>
+
+            <div class="hsg-card__footer" style="display: flex; justify-content: space-between; gap: 16px;">
+                <button type="button" id="btnPrev" class="hsg-btn hsg-btn--ghost" disabled>Kembali</button>
+                <button type="button" id="btnNext" class="hsg-btn hsg-btn--secondary">Selanjutnya</button>
+                <button type="button" id="btnSubmit" class="hsg-btn hsg-btn--primary" style="display: none;">Kirim Booking</button>
+            </div>
+        </div>
+
+        <footer class="hsg-footer hsg-mt-8">
+            <p class="hsg-text-xs hsg-text-n-400">© 2026 HS Studio • HSGMS v1.0</p>
+        </footer>
+
+    </main>
+
+    <script type="module" src="./js/booking-ui.js"></script>
+</body>
+</html>
