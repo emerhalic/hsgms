@@ -261,4 +261,4 @@ if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", initBookingUI);
 } else {
     initBookingUI();
-}S
+}
