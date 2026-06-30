@@ -2,7 +2,7 @@
  * ===========================================================
  * HS Studio Graduation Management System (HSGMS)
  * File      : booking.js
- * Sprint    : 1B (Revision) → 2C (Orchestrator) → 3C (Revision)
+ * Sprint    : 1B (Revision) → 2C (Orchestrator) → 3C (Revision / Rollback)
  *
  * Purpose:
  * Core Booking State Engine. Manages the transient state of
@@ -233,12 +233,7 @@ export const submitBooking = async (transferProofFile) => {
         // --- Step 1: Upload the transfer proof file ---
         // Delegates entirely to upload-storage.js.
         // uploadResult is an object containing { provider, fileId, fileName, url }
-        const currentState = getState();
-
-const uploadResult = await uploadTransferProof(
-    transferProofFile,
-    currentState.customer.fullName
-);
+        const uploadResult = await uploadTransferProof(transferProofFile);
 
         // --- Step 2: Persist the Download URL into state ---
         updateState({
