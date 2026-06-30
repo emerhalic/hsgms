@@ -2,16 +2,13 @@
  * ===========================================================
  * HS Studio Graduation Management System (HSGMS)
  * File: netlify/functions/upload-proof.js
- * Stage: 2 (Validation + Google Drive Integration - Revision)
+ * Stage: 3 (Validation + Google Apps Script Integration - Revision)
  * * Purpose:
  * Endpoint to receive multipart/form-data for transfer proof.
- * Validates file presence, size, and MIME type using the modern 
- * Netlify Functions Request/Response API, then uploads to Google Drive.
+ * Validates file presence, size, and MIME type, then forwards
+ * the file as a Base64 JSON payload to Google Apps Script.
  * ===========================================================
  */
-
-import { google } from 'googleapis';
-import { Readable } from 'stream';
 
 export default async (req, context) => {
     const corsHeaders = {
@@ -82,73 +79,57 @@ export default async (req, context) => {
         }
 
         // ==========================================
-        // STAGE 2: GOOGLE DRIVE UPLOAD
+        // STAGE 2: FORWARD TO GOOGLE APPS SCRIPT
         // ==========================================
 
-        const { GOOGLE_CLIENT_EMAIL, GOOGLE_PRIVATE_KEY, GOOGLE_DRIVE_FOLDER_ID } = process.env;
-
-        if (!GOOGLE_CLIENT_EMAIL || !GOOGLE_PRIVATE_KEY || !GOOGLE_DRIVE_FOLDER_ID) {
-            console.error("[upload-proof] Missing Google Drive environment variables.");
-            throw new Error("Server configuration error");
-        }
-
-        // Handle private key formatting from environment variables
-        const formattedPrivateKey = GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n');
-
-        // Authenticate with Google Service Account
-        const auth = new google.auth.JWT(
-            GOOGLE_CLIENT_EMAIL,
-            null,
-            formattedPrivateKey,
-            ['https://www.googleapis.com/auth/drive.file']
-        );
-
-        const drive = google.drive({ version: 'v3', auth });
-
-        // Convert modern Web File API blob to Node.js Readable stream
+        // Read file into Buffer and convert to Base64
         const arrayBuffer = await file.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-        const stream = Readable.from(buffer);
+        const base64String = buffer.toString('base64');
 
-        // Upload configuration
-        const fileMetadata = {
-            name: file.name,
-            parents: [GOOGLE_DRIVE_FOLDER_ID]
-        };
-        const media = {
+        // Prepare JSON payload for Google Apps Script
+        const gasUrl = "https://script.google.com/macros/s/AKfycbw2vM7cz_NBf1dzXylHCSOBRxA3-DsWoYOT9XIGfveuBn3TcxvHK-_-WX9su9I52g_Tww/exec";
+        const gasPayload = {
+            filename: file.name,
             mimeType: file.type,
-            body: stream
+            base64: base64String
         };
 
-        // Execute upload - Revision 1: only request id and name
-        const uploadResponse = await drive.files.create({
-            requestBody: fileMetadata,
-            media: media,
-            fields: 'id, name'
+        // Send HTTP POST to Google Apps Script using native fetch
+        const gasResponse = await fetch(gasUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(gasPayload)
         });
 
-        const uploadedFileId = uploadResponse.data.id;
+        // Handle HTTP errors from Apps Script before parsing JSON
+        if (!gasResponse.ok) {
+            throw new Error(`Apps Script HTTP ${gasResponse.status}`);
+        }
 
-        // Change file permissions to "Anyone with the link can view"
-        await drive.permissions.create({
-            fileId: uploadedFileId,
-            requestBody: {
-                role: 'reader',
-                type: 'anyone'
-            }
-        });
+        const gasResult = await gasResponse.json();
 
-        // Revision 2: Construct the URL manually for stability
-        const fileUrl = `https://drive.google.com/file/d/${uploadedFileId}/view`;
+        // Handle Apps Script logic failure
+        if (!gasResult.success) {
+            return new Response(
+                JSON.stringify({
+                    success: false,
+                    message: gasResult.message || "Failed to upload file to Google Drive."
+                }),
+                { status: 500, headers: corsHeaders }
+            );
+        }
 
-        // Stage 2 Success: Return metadata and accessible URL
+        // Stage 2 Success: Return metadata exactly matching previous schema
         return new Response(
             JSON.stringify({
                 success: true,
                 provider: "google-drive",
-                fileId: uploadedFileId,
-                fileName: uploadResponse.data.name,
-                url: fileUrl
+                fileId: gasResult.fileId,
+                fileName: gasResult.fileName,
+                url: gasResult.url
             }),
             { status: 200, headers: corsHeaders }
         );
