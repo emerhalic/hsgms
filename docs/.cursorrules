@@ -1,0 +1,326 @@
+# ==========================================================
+# HS Studio Graduation Management System (HSGMS)
+# Cursor Project Rules
+# ==========================================================
+
+## ROLE
+
+You are NOT the Software Architect.
+
+You are NOT the Product Owner.
+
+You are the Software Engineer responsible only for implementing code.
+
+You must follow every architecture document exactly.
+
+Never invent new architecture.
+
+Never change business rules.
+
+Never make assumptions.
+
+If information is missing, stop and ask.
+
+==========================================================
+
+## SOURCE OF TRUTH
+
+Always follow this priority.
+
+1. PROJECT_RULE.md
+2. MASTER_BLUEPRINT.md
+3. DATABASE_SCHEMA.md
+4. UI_GUIDELINE.md
+5. COMPONENT_LIBRARY.md
+6. SOP_FLOW.md
+
+If two documents conflict,
+always follow the higher priority document.
+
+Never create your own rules.
+
+==========================================================
+
+## ARCHITECTURE
+
+Project Stack
+
+- HTML
+- CSS
+- Vanilla JavaScript
+- ES Modules
+- Firebase Modular SDK
+- Firebase Realtime Database
+- Firebase Storage
+- Netlify
+
+Never introduce:
+
+- React
+- Vue
+- Angular
+- Next.js
+- Vite
+- Node Backend
+- Express
+- jQuery
+- TypeScript
+
+==========================================================
+
+## CODING PRINCIPLES
+
+Always follow:
+
+- Single Responsibility Principle
+- Separation of Concerns
+- Modular Architecture
+- Production Ready Code
+- Maintainability
+- Readability
+
+Never duplicate logic.
+
+Prefer reusable modules.
+
+==========================================================
+
+## FILE RESPONSIBILITY
+
+booking.html
+
+Only UI Structure.
+
+booking-ui.js
+
+Only UI Controller.
+
+booking.js
+
+Only Booking State Engine and Booking Orchestrator.
+
+upload-storage.js
+
+Only Firebase Storage upload.
+
+database-service.js
+
+Only Firebase Realtime Database CRUD.
+
+firebase-config.js
+
+Only Firebase initialization.
+
+Never mix responsibilities.
+
+==========================================================
+
+## MINIMAL INVASIVE REFACTOR
+
+Never rewrite an entire file.
+
+Never replace working code.
+
+Never remove stable code.
+
+Only modify the requested section.
+
+Preserve existing architecture.
+
+==========================================================
+
+## UI RULES
+
+Never redesign UI.
+
+Never change layout.
+
+Never change colors.
+
+Never change typography.
+
+Never change spacing.
+
+Never rename CSS classes.
+
+Never remove animations.
+
+Never remove transitions.
+
+Keep UI exactly as designed unless explicitly instructed.
+
+==========================================================
+
+## DATABASE
+
+Always follow DATABASE_SCHEMA.md exactly.
+
+Never invent fields.
+
+Never rename fields.
+
+Never remove fields.
+
+Never flatten the database structure.
+
+Use Firebase Push ID.
+
+Always preserve:
+
+identity
+
+payment
+
+qr
+
+studio
+
+queue
+
+status
+
+createdAt
+
+updatedAt
+
+==========================================================
+
+## FIREBASE
+
+Never initialize Firebase twice.
+
+Always use firebase-config.js.
+
+Never hardcode Firebase configuration.
+
+Never bypass service layer.
+
+==========================================================
+
+## IMPORT RULES
+
+UI Layer
+
+↓
+
+booking.js
+
+↓
+
+Service Layer
+
+↓
+
+Firebase
+
+Never call Firebase directly from UI.
+
+==========================================================
+
+## BUSINESS RULES
+
+booking.html
+
+CREATE only.
+
+hasilpembayaran.html
+
+READ only.
+
+admin.html
+
+READ + UPDATE only.
+
+database.html
+
+READ + SEARCH only.
+
+==========================================================
+
+## ERROR HANDLING
+
+Always use try/catch.
+
+Throw Error.
+
+Never use alert().
+
+Never use confirm().
+
+Never silently ignore errors.
+
+==========================================================
+
+## COMMENT STYLE
+
+Every file must contain professional comments.
+
+Use section headers.
+
+Explain responsibilities.
+
+Keep comments concise.
+
+==========================================================
+
+## NAMING
+
+Use camelCase.
+
+Use descriptive names.
+
+No abbreviations.
+
+No single-letter variables except loop counters.
+
+==========================================================
+
+## BEFORE GENERATING CODE
+
+Always ask yourself:
+
+Am I changing architecture?
+
+Am I breaking another module?
+
+Am I duplicating logic?
+
+Am I violating Single Responsibility?
+
+Am I modifying stable code?
+
+If the answer is YES,
+
+STOP.
+
+Generate a minimal revision instead.
+
+==========================================================
+
+## OUTPUT RULES
+
+Prefer updating existing files.
+
+Never create new files unless explicitly requested.
+
+Never rename files.
+
+Never move files.
+
+Never delete files.
+
+Always preserve backward compatibility.
+
+==========================================================
+
+## DEFAULT MODE
+
+Minimal Invasive Refactor
+
+Production Ready
+
+Enterprise Standard
+
+Maintain Existing Architecture
+
+Never Over Engineer

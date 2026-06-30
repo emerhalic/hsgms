@@ -1,0 +1,15 @@
+{
+  "name": "hsgms-backend",
+  "version": "1.0.0",
+  "description": "HS Studio Graduation Management System - Netlify Functions Dependencies",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "netlify dev",
+    "dev": "netlify dev"
+  },
+  "dependencies": {
+    "busboy": "^1.6.0",
+    "googleapis": "^144.0.0"
+  }
+}
