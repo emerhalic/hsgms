@@ -1,0 +1,10 @@
+{
+  "_comment": "Replace {UID} with Firebase Auth UID after first signup. Deploy to /adminUsers/{UID}",
+  "{UID}": {
+    "email": "owner@hsstudio.com",
+    "displayName": "HS Studio Owner",
+    "role": "owner",
+    "createdAt": 1718000000000,
+    "updatedAt": 1718000000000
+  }
+}

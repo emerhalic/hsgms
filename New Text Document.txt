@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Verification Dashboard - HS Studio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./admin.css">
+</head>
+<body>
+
+    <div class="adm-app">
+
+        <!-- Sidebar -->
+        <aside class="adm-sidebar" id="sidebar" aria-label="Navigasi admin">
+            <div class="adm-sidebar__brand">
+                <span class="adm-sidebar__logo">🎓 HS STUDIO</span>
+                <span class="adm-sidebar__subtitle">Graduation Management System</span>
+            </div>
+
+            <nav class="adm-sidebar__nav">
+                <a href="./admin.html" class="adm-sidebar__link is-active" aria-current="page">
+                    <span class="adm-sidebar__link-icon">📋</span>
+                    Verifikasi Booking
+                </a>
+                <a href="../booking.html" class="adm-sidebar__link">
+                    <span class="adm-sidebar__link-icon">📝</span>
+                    Form Booking
+                </a>
+            </nav>
+
+            <div class="adm-sidebar__footer">
+                © 2026 HS Studio • HSGMS v1.0
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="adm-main">
+
+            <!-- Header -->
+            <header class="adm-header">
+                <div class="adm-header__left">
+                    <button type="button" class="adm-menu-toggle" id="menuToggle" aria-label="Buka menu">☰</button>
+                    <h1 class="adm-header__title">Admin Verification Dashboard</h1>
+                </div>
+                <span class="adm-header__meta">Verifikasi booking wisuda</span>
+            </header>
+
+            <main class="adm-content">
+
+                <!-- Statistics Cards -->
+                <section class="adm-stats" aria-label="Statistik booking">
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-card__icon">📊</div>
+                        <p class="adm-stat-card__label">Total Bookings</p>
+                        <p class="adm-stat-card__value" id="statTotal">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--pending">
+                        <div class="adm-stat-card__icon">⏳</div>
+                        <p class="adm-stat-card__label">Pending</p>
+                        <p class="adm-stat-card__value" id="statPending">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--verified">
+                        <div class="adm-stat-card__icon">✅</div>
+                        <p class="adm-stat-card__label">Verified</p>
+                        <p class="adm-stat-card__value" id="statVerified">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--rejected">
+                        <div class="adm-stat-card__icon">❌</div>
+                        <p class="adm-stat-card__label">Rejected</p>
+                        <p class="adm-stat-card__value" id="statRejected">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--today">
+                        <div class="adm-stat-card__icon">📅</div>
+                        <p class="adm-stat-card__label">Today's Bookings</p>
+                        <p class="adm-stat-card__value" id="statToday">0</p>
+                    </div>
+                </section>
+
+                <!-- Workspace: Table + Detail -->
+                <div class="adm-workspace">
+
+                    <!-- Bookings Table Panel -->
+                    <section class="adm-panel" aria-label="Daftar booking">
+                        <div class="adm-panel__header">
+                            <h2 class="adm-panel__title">Recent Bookings</h2>
+                            <div class="adm-panel__controls">
+                                <div class="adm-search">
+                                    <span class="adm-search__icon" aria-hidden="true">🔍</span>
+                                    <input
+                                        type="search"
+                                        id="searchInput"
+                                        class="adm-search__input"
+                                        placeholder="Cari nama, telepon, universitas..."
+                                        aria-label="Cari booking"
+                                        autocomplete="off"
+                                    />
+                                </div>
+                                <select id="sortSelect" class="adm-select" aria-label="Urutkan booking">
+                                    <option value="newest">Newest</option>
+                                    <option value="oldest">Oldest</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Filter Pills -->
+                        <div class="adm-filters" role="group" aria-label="Filter status">
+                            <button type="button" class="adm-filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" class="adm-filter-btn" data-filter="pending" aria-pressed="false">Pending</button>
+                            <button type="button" class="adm-filter-btn" data-filter="verified" aria-pressed="false">Verified</button>
+                            <button type="button" class="adm-filter-btn" data-filter="rejected" aria-pressed="false">Rejected</button>
+                        </div>
+
+                        <div class="adm-panel__body">
+                            <!-- Loading Skeleton -->
+                            <div class="adm-loading" id="tableLoading" aria-live="polite" aria-busy="true">
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                            </div>
+
+                            <!-- Empty State -->
+                            <div class="adm-empty" id="tableEmpty" hidden>
+                                <span class="adm-empty__icon">📭</span>
+                                <p class="adm-empty__title">Tidak ada booking ditemukan</p>
+                                <p class="adm-empty__desc">Coba ubah filter atau kata kunci pencarian.</p>
+                            </div>
+
+                            <!-- Table -->
+                            <div class="adm-table-wrap">
+                                <table class="adm-table" id="bookingsTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Booking Date</th>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Phone Number</th>
+                                            <th scope="col">University</th>
+                                            <th scope="col">Study Program</th>
+                                            <th scope="col">Package</th>
+                                            <th scope="col">DP</th>
+                                            <th scope="col">Remaining</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bookingsTbody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Detail Panel -->
+                    <aside class="adm-panel adm-detail" id="detailPanel" aria-label="Detail booking">
+                        <div class="adm-panel__header">
+                            <h2 class="adm-panel__title">Booking Detail</h2>
+                        </div>
+
+                        <!-- Empty Detail State -->
+                        <div class="adm-detail__empty" id="detailEmpty">
+                            <span class="adm-detail__empty-icon">👆</span>
+                            <p class="adm-detail__empty-title">Pilih booking</p>
+                            <p class="adm-detail__empty-desc">Klik baris booking di tabel untuk melihat detail lengkap.</p>
+                        </div>
+
+                        <!-- Detail Content (rendered by admin-ui.js) -->
+                        <div id="detailContent" hidden></div>
+                    </aside>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Reject Confirmation Modal -->
+    <div class="adm-modal" id="rejectModal" hidden role="dialog" aria-modal="true" aria-labelledby="rejectModalTitle">
+        <div class="adm-modal__backdrop"></div>
+        <div class="adm-modal__dialog">
+            <div class="adm-modal__icon">⚠️</div>
+            <h3 class="adm-modal__title" id="rejectModalTitle">Konfirmasi Penolakan</h3>
+            <p class="adm-modal__message" id="rejectModalMsg">
+                Apakah Anda yakin ingin menolak booking ini?
+            </p>
+            <div class="adm-modal__actions">
+                <button type="button" class="adm-btn adm-btn--ghost" id="btnRejectCancel">Batal</button>
+                <button type="button" class="adm-btn adm-btn--danger" id="btnRejectConfirm" style="background: var(--d-500); color: #fff; border: none;">Ya, Tolak</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="adm-toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- Mobile Sidebar Toggle -->
+    <script>
+        document.getElementById("menuToggle")?.addEventListener("click", () => {
+            document.getElementById("sidebar")?.classList.toggle("is-open");
+        });
+    </script>
+
+    <script type="module" src="./admin-ui.js"></script>
+</body>
+</html>

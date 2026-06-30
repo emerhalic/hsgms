@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Admin - HS Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./login.css">
+</head>
+<body>
+    <main class="login-page" aria-label="Halaman login admin">
+        <section class="login-card">
+            <header class="login-card__header">
+                <span class="login-card__logo" aria-hidden="true">🎓</span>
+                <h1 class="login-card__title">HS Studio Admin</h1>
+                <p class="login-card__subtitle">Graduation Management System</p>
+            </header>
+
+            <div class="login-alert" id="loginError" role="alert" hidden></div>
+
+            <form id="loginForm" class="login-form" novalidate>
+                <div class="login-field">
+                    <label for="loginEmail" class="login-label">Email</label>
+                    <input type="email" id="loginEmail" class="login-input" autocomplete="username" required placeholder="admin@hsstudio.com" />
+                </div>
+                <div class="login-field">
+                    <label for="loginPassword" class="login-label">Password</label>
+                    <input type="password" id="loginPassword" class="login-input" autocomplete="current-password" required placeholder="••••••••" />
+                </div>
+                <button type="submit" class="login-btn login-btn--primary" id="btnEmailLogin">Masuk</button>
+            </form>
+
+            <div class="login-divider" role="separator"><span>atau</span></div>
+
+            <button type="button" class="login-btn login-btn--google" id="btnGoogleLogin" aria-label="Masuk dengan Google">
+                <span aria-hidden="true">G</span> Masuk dengan Google
+            </button>
+
+            <footer class="login-card__footer">
+                <p class="login-footer-text">© 2026 HS Studio • HSGMS v1.0</p>
+            </footer>
+        </section>
+    </main>
+
+    <div class="adm-toast-container" id="toastContainer" aria-live="polite"></div>
+    <script type="module" src="./login-ui.js"></script>
+</body>
+</html>

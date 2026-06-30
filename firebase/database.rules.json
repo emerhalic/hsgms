@@ -1,0 +1,44 @@
+{
+  "rules": {
+    "bookings": {
+      ".indexOn": ["status", "identity/graduationDate", "createdAt"],
+
+      "$bookingId": {
+        ".read": "auth != null && root.child('adminUsers').child(auth.uid).exists()",
+
+        ".write": "!data.exists() || (auth != null && (root.child('adminUsers').child(auth.uid).child('role').val() == 'owner' || root.child('adminUsers').child(auth.uid).child('role').val() == 'admin'))",
+
+        ".validate": "!newData.exists() || newData.hasChildren(['identity', 'status', 'createdAt', 'updatedAt'])",
+
+        "identity": {
+          ".validate": "!data.exists() || !newData.exists()"
+        },
+
+        "status": {
+          ".validate": "newData.isString()"
+        },
+
+        "audit": {
+          ".validate": "auth != null"
+        },
+
+        "payment": {
+          "dpVerifiedBy": {
+            ".validate": "auth != null"
+          },
+          "dpPaidAt": {
+            ".validate": "auth != null"
+          }
+        }
+      }
+    },
+
+    "adminUsers": {
+      "$uid": {
+        ".read": "auth != null && auth.uid == $uid",
+        ".write": "auth != null && root.child('adminUsers').child(auth.uid).child('role').val() == 'owner'",
+        ".validate": "newData.hasChildren(['email', 'role']) && (newData.child('role').val() == 'owner' || newData.child('role').val() == 'admin' || newData.child('role').val() == 'cashier' || newData.child('role').val() == 'editor')"
+      }
+    }
+  }
+}

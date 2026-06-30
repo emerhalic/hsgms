@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Verification Dashboard - HS Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./admin.css">
+    <link rel="stylesheet" href="./print.css" media="print">
+</head>
+<body>
+    <div class="adm-app">
+        <aside class="adm-sidebar" id="sidebar" aria-label="Navigasi admin">
+            <div class="adm-sidebar__brand">
+                <span class="adm-sidebar__logo">🎓 HS STUDIO</span>
+                <span class="adm-sidebar__subtitle">Graduation Management System</span>
+            </div>
+            <nav class="adm-sidebar__nav">
+                <a href="./admin.html" class="adm-sidebar__link is-active" aria-current="page">
+                    <span class="adm-sidebar__link-icon" aria-hidden="true">📋</span>
+                    Verifikasi Booking
+                </a>
+                <a href="../booking.html" class="adm-sidebar__link">
+                    <span class="adm-sidebar__link-icon" aria-hidden="true">📝</span>
+                    Form Booking
+                </a>
+            </nav>
+            <div class="adm-sidebar__footer">© 2026 HS Studio • HSGMS v1.0</div>
+        </aside>
+
+        <div class="adm-main">
+            <header class="adm-header">
+                <div class="adm-header__left">
+                    <button type="button" class="adm-menu-toggle" id="menuToggle" aria-label="Buka menu navigasi">☰</button>
+                    <h1 class="adm-header__title">Admin Verification Dashboard</h1>
+                </div>
+                <div class="adm-header__right">
+                    <span class="adm-role-badge" id="userRoleBadge" aria-label="Peran pengguna"></span>
+                    <span class="adm-header__user" id="userDisplayName"></span>
+                    <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btnLogout" hidden aria-label="Keluar">Keluar</button>
+                </div>
+            </header>
+
+            <main class="adm-content">
+                <section class="adm-stats adm-stats--extended" aria-label="Statistik booking">
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-card__icon" aria-hidden="true">📊</div>
+                        <p class="adm-stat-card__label">Total Bookings</p>
+                        <p class="adm-stat-card__value" id="statTotal">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--today">
+                        <div class="adm-stat-card__icon" aria-hidden="true">📅</div>
+                        <p class="adm-stat-card__label">Today's Bookings</p>
+                        <p class="adm-stat-card__value" id="statToday">0</p>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-card__icon" aria-hidden="true">📆</div>
+                        <p class="adm-stat-card__label">Weekly Bookings</p>
+                        <p class="adm-stat-card__value" id="statWeekly">0</p>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-card__icon" aria-hidden="true">🗓</div>
+                        <p class="adm-stat-card__label">Monthly Bookings</p>
+                        <p class="adm-stat-card__value" id="statMonthly">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--pending">
+                        <div class="adm-stat-card__icon" aria-hidden="true">⏳</div>
+                        <p class="adm-stat-card__label">Pending</p>
+                        <p class="adm-stat-card__value" id="statPending">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--verified">
+                        <div class="adm-stat-card__icon" aria-hidden="true">✅</div>
+                        <p class="adm-stat-card__label">Verified</p>
+                        <p class="adm-stat-card__value" id="statVerified">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--rejected">
+                        <div class="adm-stat-card__icon" aria-hidden="true">❌</div>
+                        <p class="adm-stat-card__label">Rejected</p>
+                        <p class="adm-stat-card__value" id="statRejected">0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--pending">
+                        <div class="adm-stat-card__icon" aria-hidden="true">💰</div>
+                        <p class="adm-stat-card__label">Pending Payment Value</p>
+                        <p class="adm-stat-card__value adm-stat-card__value--sm" id="statPendingPayment">Rp 0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--verified">
+                        <div class="adm-stat-card__icon" aria-hidden="true">💵</div>
+                        <p class="adm-stat-card__label">Verified Payment Value</p>
+                        <p class="adm-stat-card__value adm-stat-card__value--sm" id="statVerifiedPayment">Rp 0</p>
+                    </div>
+                    <div class="adm-stat-card adm-stat-card--today">
+                        <div class="adm-stat-card__icon" aria-hidden="true">📈</div>
+                        <p class="adm-stat-card__label">Total Revenue Estimate</p>
+                        <p class="adm-stat-card__value adm-stat-card__value--sm" id="statRevenue">Rp 0</p>
+                    </div>
+                </section>
+
+                <div class="adm-workspace">
+                    <section class="adm-panel" aria-label="Daftar booking">
+                        <div class="adm-panel__header">
+                            <h2 class="adm-panel__title">Recent Bookings</h2>
+                            <div class="adm-panel__controls">
+                                <div class="adm-search">
+                                    <span class="adm-search__icon" aria-hidden="true">🔍</span>
+                                    <input type="search" id="searchInput" class="adm-search__input"
+                                        placeholder="Cari nama, telepon, universitas..."
+                                        aria-label="Cari booking" autocomplete="off" />
+                                </div>
+                                <select id="sortSelect" class="adm-select" aria-label="Urutkan booking">
+                                    <option value="newest">Newest</option>
+                                    <option value="oldest">Oldest</option>
+                                </select>
+                                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btnExportCsv" aria-label="Export CSV">CSV</button>
+                                <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btnExportExcel" aria-label="Export Excel">Excel</button>
+                            </div>
+                        </div>
+
+                        <div class="adm-filters" role="group" aria-label="Filter status">
+                            <button type="button" class="adm-filter-btn is-active" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" class="adm-filter-btn" data-filter="pending" aria-pressed="false">Pending</button>
+                            <button type="button" class="adm-filter-btn" data-filter="verified" aria-pressed="false">Verified</button>
+                            <button type="button" class="adm-filter-btn" data-filter="rejected" aria-pressed="false">Rejected</button>
+                        </div>
+
+                        <div class="adm-panel__body">
+                            <div class="adm-loading" id="tableLoading" aria-live="polite" aria-busy="true">
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                                <div class="adm-loading__row"></div>
+                            </div>
+
+                            <div class="adm-empty" id="tableEmpty" hidden>
+                                <span class="adm-empty__icon" aria-hidden="true">📭</span>
+                                <p class="adm-empty__title">Tidak ada booking ditemukan</p>
+                                <p class="adm-empty__desc">Coba ubah filter atau kata kunci pencarian.</p>
+                            </div>
+
+                            <div class="adm-state-banner adm-state-banner--error" id="tableError" hidden role="alert">
+                                <span class="adm-state-banner__icon" aria-hidden="true">⚠️</span>
+                                <div>
+                                    <p class="adm-state-banner__title">Gagal memuat data</p>
+                                    <p class="adm-state-banner__desc">Terjadi kesalahan saat menghubungkan ke Firebase.</p>
+                                </div>
+                                <button type="button" class="adm-btn adm-btn--secondary adm-btn--sm" id="btnRetry">Coba Lagi</button>
+                            </div>
+
+                            <div class="adm-state-banner adm-state-banner--offline" id="tableOffline" hidden role="status">
+                                <span class="adm-state-banner__icon" aria-hidden="true">📡</span>
+                                <div>
+                                    <p class="adm-state-banner__title">Anda sedang offline</p>
+                                    <p class="adm-state-banner__desc">Periksa koneksi internet Anda.</p>
+                                </div>
+                                <button type="button" class="adm-btn adm-btn--secondary adm-btn--sm" id="btnRetryOffline">Coba Lagi</button>
+                            </div>
+
+                            <div class="adm-table-wrap">
+                                <table class="adm-table" id="bookingsTable">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Booking Date</th>
+                                            <th scope="col">Full Name</th>
+                                            <th scope="col">Phone Number</th>
+                                            <th scope="col">University</th>
+                                            <th scope="col">Study Program</th>
+                                            <th scope="col">Package</th>
+                                            <th scope="col">DP</th>
+                                            <th scope="col">Remaining</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="bookingsTbody"></tbody>
+                                </table>
+                            </div>
+
+                            <div class="adm-pagination" aria-label="Navigasi halaman">
+                                <p class="adm-pagination__info" id="paginationInfo">—</p>
+                                <div class="adm-pagination__controls">
+                                    <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btnPagePrev" aria-label="Halaman sebelumnya">← Prev</button>
+                                    <span class="adm-pagination__page" id="paginationPage">Halaman 1 / 1</span>
+                                    <button type="button" class="adm-btn adm-btn--ghost adm-btn--sm" id="btnPageNext" aria-label="Halaman berikutnya">Next →</button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <aside class="adm-panel adm-detail" id="detailPanel" aria-label="Detail booking">
+                        <div class="adm-panel__header">
+                            <h2 class="adm-panel__title">Booking Detail</h2>
+                        </div>
+                        <div class="adm-detail__empty" id="detailEmpty">
+                            <span class="adm-detail__empty-icon" aria-hidden="true">👆</span>
+                            <p class="adm-detail__empty-title">Pilih booking</p>
+                            <p class="adm-detail__empty-desc">Klik baris booking di tabel untuk melihat detail lengkap.</p>
+                        </div>
+                        <div id="detailContent" hidden></div>
+                    </aside>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <div class="adm-modal" id="rejectModal" hidden role="dialog" aria-modal="true" aria-labelledby="rejectModalTitle">
+        <div class="adm-modal__backdrop"></div>
+        <div class="adm-modal__dialog">
+            <div class="adm-modal__icon" aria-hidden="true">⚠️</div>
+            <h3 class="adm-modal__title" id="rejectModalTitle">Konfirmasi Penolakan</h3>
+            <p class="adm-modal__message" id="rejectModalMsg">Pilih alasan penolakan booking.</p>
+            <fieldset class="adm-reasons" id="rejectReasons" aria-label="Alasan penolakan"></fieldset>
+            <div class="adm-reason-other" id="rejectOtherWrap" hidden>
+                <label for="rejectOtherInput" class="adm-label">Alasan lainnya</label>
+                <textarea id="rejectOtherInput" class="adm-textarea" rows="3" placeholder="Jelaskan alasan penolakan..."></textarea>
+            </div>
+            <div class="adm-modal__actions">
+                <button type="button" class="adm-btn adm-btn--ghost" id="btnRejectCancel">Batal</button>
+                <button type="button" class="adm-btn adm-btn--danger-solid" id="btnRejectConfirm">Ya, Tolak</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="adm-toast-container" id="toastContainer" aria-live="polite"></div>
+    <script type="module" src="./admin-ui.js"></script>
+</body>
+</html>

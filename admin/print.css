@@ -1,0 +1,44 @@
+@media print {
+    .adm-sidebar,
+    .adm-header,
+    .adm-stats,
+    .adm-panel:not(.adm-detail),
+    .adm-filters,
+    .adm-panel__controls,
+    .adm-pagination,
+    .adm-detail__quick-actions,
+    .adm-detail__actions,
+    .no-print,
+    .adm-toast-container,
+    .adm-menu-toggle {
+        display: none !important;
+    }
+
+    .adm-main {
+        margin-left: 0 !important;
+    }
+
+    .adm-workspace {
+        display: block !important;
+    }
+
+    .adm-detail {
+        position: static !important;
+        max-height: none !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    body {
+        background: white !important;
+        font-size: 12pt;
+    }
+
+    .adm-badge {
+        border: 1px solid #999 !important;
+    }
+
+    .adm-proof__image {
+        max-height: 300px !important;
+    }
+}
