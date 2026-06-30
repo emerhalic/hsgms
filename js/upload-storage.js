@@ -132,7 +132,9 @@ export const uploadTransferProof = async (file, fullName) => {
 
         // --- Step 5: Construct FormData ---
         const formData = new FormData();
-        formData.append("fullName", fullName);
+
+formData.append("file", renamedFile);
+formData.append("fullName", fullName);
 
         // --- Step 6: Transmit to Netlify Function ---
         const response = await fetch(UPLOAD_ENDPOINT, {
