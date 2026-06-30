@@ -233,7 +233,12 @@ export const submitBooking = async (transferProofFile) => {
         // --- Step 1: Upload the transfer proof file ---
         // Delegates entirely to upload-storage.js.
         // uploadResult is an object containing { provider, fileId, fileName, url }
-        const uploadResult = await uploadTransferProof(transferProofFile);
+        const currentState = getState();
+
+const uploadResult = await uploadTransferProof(
+    transferProofFile,
+    currentState.customer.fullName
+);
 
         // --- Step 2: Persist the Download URL into state ---
         updateState({

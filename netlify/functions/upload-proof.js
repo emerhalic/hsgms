@@ -89,11 +89,14 @@ export default async (req, context) => {
 
         // Prepare JSON payload for Google Apps Script
         const gasUrl = process.env.GAS_WEBHOOK_URL;
-        const gasPayload = {
-            filename: file.name,
-            mimeType: file.type,
-            base64: base64String
-        };
+        const fullName = formData.get("fullName") || "Unknown";
+
+const gasPayload = {
+    filename: file.name,
+    mimeType: file.type,
+    base64: base64String,
+    fullName: fullName
+};
 
         // Send HTTP POST to Google Apps Script using native fetch
         const gasResponse = await fetch(gasUrl, {

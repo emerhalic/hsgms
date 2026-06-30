@@ -100,7 +100,7 @@ const generateUniqueFilename = (file) => {
  * @throws {Error} Throws a descriptive Error if the file is
  * invalid or if the upload operation fails.
  */
-export const uploadTransferProof = async (file) => {
+export const uploadTransferProof = async (file, fullName) => {
     // --- Step 1: Validate file object existence ---
     if (!file || !(file instanceof File)) {
         throw new Error(
@@ -132,7 +132,7 @@ export const uploadTransferProof = async (file) => {
 
         // --- Step 5: Construct FormData ---
         const formData = new FormData();
-        formData.append("file", renamedFile);
+        formData.append("fullName", fullName);
 
         // --- Step 6: Transmit to Netlify Function ---
         const response = await fetch(UPLOAD_ENDPOINT, {
