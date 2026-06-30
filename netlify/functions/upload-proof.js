@@ -88,7 +88,7 @@ export default async (req, context) => {
         const base64String = buffer.toString('base64');
 
         // Prepare JSON payload for Google Apps Script
-        const gasUrl = "https://script.google.com/macros/s/AKfycbw2vM7cz_NBf1dzXylHCSOBRxA3-DsWoYOT9XIGfveuBn3TcxvHK-_-WX9su9I52g_Tww/exec";
+        const gasUrl = process.env.GAS_WEBHOOK_URL;
         const gasPayload = {
             filename: file.name,
             mimeType: file.type,

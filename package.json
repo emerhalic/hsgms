@@ -7,9 +7,5 @@
   "scripts": {
     "start": "netlify dev",
     "dev": "netlify dev"
-  },
-  "dependencies": {
-    "busboy": "^1.6.0",
-    "googleapis": "^144.0.0"
   }
 }
